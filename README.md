@@ -2,7 +2,7 @@
 
 # Nginx #
 
-* **Contributors:** [rtcamp] (http://profiles.wordpress.org/rtcamp), [rahul286] (http://profiles.wordpress.org/rahul286), [saurabhshukla] (http://profiles.wordpress.org/saurabhshukla), [Darren] (http://profiles.wordpress.org/Darren), [Slatten] (http://profiles.wordpress.org/Slatten), [jk3us] (http://profiles.wordpress.org/jk3us), [daankortenbach] (http://profiles.wordpress.org/daankortenbach), [telofy] (http://profiles.wordpress.org/telofy), [pjv] (http://profiles.wordpress.org/pjv),
+* **Contributors:** [rtcamp] (http://profiles.wordpress.org/rtcamp), [rahul286] (http://profiles.wordpress.org/rahul286), [saurabhshukla] (http://profiles.wordpress.org/saurabhshukla), [Darren] (http://profiles.wordpress.org/Darren), [Slatten] (http://profiles.wordpress.org/Slatten), [jk3us] (http://profiles.wordpress.org/jk3us), [daankortenbach] (http://profiles.wordpress.org/daankortenbach), [telofy] (http://profiles.wordpress.org/telofy), [pjv] (http://profiles.wordpress.org/pjv), [mjbrown] (http://profiles.wordpress.org/mjbrown),
 
 * **License:** [GPL v2 or later] ( http://www.gnu.org/licenses/gpl-2.0.html)
 
@@ -25,6 +25,15 @@ You will need to follow one ore more tutorials below to get desired functionalit
 * [Nginx + WordPress-Multisite (Subdirectories) + fastcgi_purge_cache](http://rtcamp.com/tutorials/wordpress-multisite-subdirectories-nginx-fastcgi-cache-purge/)
 * [Nginx + WordPress-Multisite (Subdomains/domain-mapping) + fastcgi_purge_cache](http://rtcamp.com/tutorials/wordpress-multisite-subdomains-domain-mapping-nginx-fastcgi-cache-purge/)
 * [Other WordPress-Nginx Tutorials](http://rtcamp.com/wordpress-nginx/tutorials/)
+
+**NOTE:** This fork includes implicit multisite map support for multiple Nginx servers. Since the Nginx map{...} 
+function is common to all virtual servers, the *$server_name* variable is used to disambiguate
+blog names amongst multisite networks. To use the Nginx map{...} function its configuration needs to be coded
+with **"$server_name:"** prefixed to the *$blogname* variable as follows:
+
+        map $server_name:$blogname $blogid {  
+            include /.../wp-content/uploads/map.conf;  
+        }  
 
 
 ## Installation ##
