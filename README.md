@@ -16,6 +16,16 @@ Helps WordPress-Nginx work together nicely using fastcgi/proxy cache purging, ng
 1. Adds support for nginx fastcgi_cache_purge & proxy_cache_purge directive from [module](https://github.com/FRiCKLE/ngx_cache_purge "ngx_cache_purge module"). Provides settings so you can customize purging rules.
 1. Adds support for nginx `map{..}` on a WordPress-multisite network installation. Using it Nginx can serve PHP file uploads even if PHP/MySQL crashes. Please check tutorials list below for related Nginx config.
 
+**NOTE:** This fork includes implicit multisite map support for multiple Nginx servers. Since the Nginx map{...} 
+function is common to all virtual servers, the *$server_name* variable is used to disambiguate
+blog names amongst multisite networks. To use the Nginx map{...} function its configuration needs to be coded
+with **"$server_name:"** prefixed to the *$blogname* variable as in the follow example:
+
+        map $server_name:$blogname $blogid {  
+            include /srv/web/wpnet1/wordpress/wp-content/uploads/map.conf;  
+            include /srv/web/wpnet2/wordpress/wp-content/uploads/map.conf;  
+        }  
+
 #### Tutorials ####
 
 You will need to follow one ore more tutorials below to get desired functionality:
@@ -25,16 +35,6 @@ You will need to follow one ore more tutorials below to get desired functionalit
 * [Nginx + WordPress-Multisite (Subdirectories) + fastcgi_purge_cache](http://rtcamp.com/tutorials/wordpress-multisite-subdirectories-nginx-fastcgi-cache-purge/)
 * [Nginx + WordPress-Multisite (Subdomains/domain-mapping) + fastcgi_purge_cache](http://rtcamp.com/tutorials/wordpress-multisite-subdomains-domain-mapping-nginx-fastcgi-cache-purge/)
 * [Other WordPress-Nginx Tutorials](http://rtcamp.com/wordpress-nginx/tutorials/)
-
-**NOTE:** This fork includes implicit multisite map support for multiple Nginx servers. Since the Nginx map{...} 
-function is common to all virtual servers, the *$server_name* variable is used to disambiguate
-blog names amongst multisite networks. To use the Nginx map{...} function its configuration needs to be coded
-with **"$server_name:"** prefixed to the *$blogname* variable as follows:
-
-        map $server_name:$blogname $blogid {  
-            include /.../wp-content/uploads/map.conf;  
-        }  
-
 
 ## Installation ##
 
@@ -83,7 +83,6 @@ As long as you don't purge the page (or make changes that purge it from the cach
 
 The rest shows you the database queries and time saved on loading this page. (This would have been the additional resource load, if you weren't using fast-cgi-cache.)
 
-
 **Q. I need to flush a cached page immediately! How do I do that?**
 
 Nginx helper plugin handles usual scenarios, when a page in the cache will need purging. For example, when a post is edited or a comment is approved on a post.
@@ -121,6 +120,9 @@ Its just that we are hyperactive on our own forum!
 2. Remaining settings
 
 ## Changelog ##
+
+#### 1.7.1a ####
+* Enhanced Nginx map{...} support for multiple virtual servers. Note: change required to Nginx map configuration as described above.
 
 #### 1.7.1 ####
 * Fixes bug in true purge and admin screen.

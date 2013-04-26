@@ -4,8 +4,8 @@
   #Original Plugin Name: Nginx Helper Multimap
   Plugin URI: http://github.com/murrayjbrown/
   #Original Plugin URI: http://rtcamp.com/
-  Description: An nginx helper that serves various functions, enhanced with implicit mapping support for multisite networks on multiple nginx servers.
-  Version: 1.7.1
+  Description: An nginx helper that serves various functions - enhanced with implicit mapping support for multisite networks on multiple nginx servers.
+  Version: 1.7.1a
   Author: mjbrown
   #Original Author: rtCamp
   Author URI: http://mjbrown.com
