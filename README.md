@@ -10,6 +10,8 @@
 
 Helps WordPress-Nginx work together nicely using fastcgi/proxy cache purging, nginx map{}, rewrite  support for permalinks & more
 
+**DEPRECATED:** *This fork is no longer supported as static file mapping is not required as of Wordpress 3.5. More information on the rationale can be found in the discussion on [rtCamp pull request 23](https://github.com/rtCamp/nginx-helper/pull/23#issuecomment-25428338).*
+
 ## Description ##
 
 1. Removes `index.php` from permalinks when using WordPress with nginx.
